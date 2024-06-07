@@ -8,13 +8,24 @@ import java.util.List;
 
 public class ArrayListQuestions {
   public static void main(String[] args) {
-    int[] arr1 = { 5, 6, 7 };
-    int[] arr2 = { 3, 4, 4, 6 };
+    int[] arr1 = { 5, 5, 4, 6 };
+    int[] arr2 = { 5, 5 };
 
     // intersection:
     // how we can use this sorting behaviour of arrays
     // intersection(arr1, arr2);
     add(arr1, arr2);
+    runningSum(arr1);
+
+  }
+
+  public static void runningSum(int[] arr) {
+    int[] result = new int[arr.length];
+    result[0] = arr[0];
+    for (int i = 1; i < arr.length; i++) {
+      result[i] = arr[i] + result[i - 1];
+    }
+    display(result);
   }
 
   public static void add(int[] arr1, int[] arr2) {
@@ -36,23 +47,10 @@ public class ArrayListQuestions {
 
       carry = sum / 10;
       sum = sum % 10;
-      list.add(sum);
+      list.add(0, sum);
     }
-    Collections.reverse(list);
+
     System.out.println(list);
-    // convert arraylist to array
-    int[] result = new int[list.size()];
-    for (int k = 0; k < list.size(); k++) {
-      result[result.length - 1 - k] = list.get(k);
-    }
-
-    display(result);
-  }
-
-  public static void display(int[] arr) {
-    for (int i = 0; i < arr.length; i++) {
-      System.out.print(arr[i] + " ");
-    }
   }
 
   public static void intersection(int[] arr1, int[] arr2) {
@@ -74,5 +72,11 @@ public class ArrayListQuestions {
     }
 
     System.out.println(resultList);
+  }
+
+  public static void display(int[] arr) {
+    for (int i = 0; i < arr.length; i++) {
+      System.out.print(arr[i] + " ");
+    }
   }
 }
