@@ -11,16 +11,50 @@ public class TwoDArray {
 
         int[][] b = {
                 new int[] { 1, 2, 10 },
-                new int[] { 3, 4, 5},
+                new int[] { 3, 4, 5 },
                 new int[] { 6, 7, 8 },
                 new int[] { 6, 7, 8 }
         };
+        int[] arr = { 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0 };
 
         // printWave(b);
         // transposeMatrix(b);
-        matrixMul(a, b);
-        spiralMatrix(b);
+        // matrixMul(a, b);
+        // spiralMatrix(b);
+        sortZeroAndOneDP(arr);
+        display(arr);
 
+    }
+
+    public static void sortZeroAndOneDP(int[] arr) {
+        int left = 0;
+        int right = arr.length - 1;
+
+        while (left < right) {
+           if(arr[left] == 0){
+                left++;
+           }else{
+                //swap
+                int temp = arr[right];
+                arr[right]= arr[left];
+                arr[left]= temp;
+                right--;
+           }
+
+        }
+    }
+
+    public static void sortZeroAndOneSP(int[] arr) {
+        int zeroIndex = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 0) {
+                int temp = arr[zeroIndex];
+                arr[zeroIndex] = arr[i];
+                arr[i] = temp;
+                zeroIndex++;
+            }
+        }
     }
 
     public static void spiralMatrix(int[][] matrix) {
@@ -29,47 +63,47 @@ public class TwoDArray {
         List<Integer> result = new ArrayList<>();
 
         int rowStart = 0;
-        int rowEnd = matrix.length-1;
+        int rowEnd = matrix.length - 1;
         int colStart = 0;
-        int colEnd = matrix[0].length-1;
-        int count = rows *cols;
+        int colEnd = matrix[0].length - 1;
+        int count = rows * cols;
 
-       
-       while(count >0 ){
-          for(int j=colStart;j<=colEnd;j++){
-            result.add(matrix[rowStart][j]);
-            count--;
-        }   
-        
-        rowStart++;
-        if(count == 0) break;
+        while (count > 0) {
+            for (int j = colStart; j <= colEnd; j++) {
+                result.add(matrix[rowStart][j]);
+                count--;
+            }
 
-        
-        for(int i=rowStart;i<=rowEnd;i++){
-         result.add(matrix[i][colEnd]);
-         count--;
+            rowStart++;
+            if (count == 0)
+                break;
+
+            for (int i = rowStart; i <= rowEnd; i++) {
+                result.add(matrix[i][colEnd]);
+                count--;
+            }
+            colEnd--;
+            if (count == 0)
+                break;
+
+            for (int j = colEnd; j >= colStart; j--) {
+                result.add(matrix[rowEnd][j]);
+                count--;
+            }
+            rowEnd--;
+            if (count == 0)
+                break;
+
+            for (int i = rowEnd; i >= rowStart; i--) {
+                result.add(matrix[i][colStart]);
+                count--;
+
+            }
+            colStart++;
+            if (count == 0)
+                break;
+
         }
-        colEnd--;
-         if(count == 0) break;
-
-        for(int j=colEnd;j>=colStart;j--){
-              result.add(matrix[rowEnd][j]);
-               count--;
-        }
-         rowEnd--;
-          if(count == 0) break;
-
-       
-        for(int i=rowEnd;i>=rowStart;i--){
-             result.add(matrix[i][colStart]);
-              count--;
-         
-        }
-        colStart++;
-        if(count == 0) break;
-
-       }
-       
 
         System.out.println(result);
     }
@@ -82,8 +116,9 @@ public class TwoDArray {
         int cols2 = b[0].length;
 
         System.out.println(cols1 + " " + rows2);
-        if (cols1 != rows2) return;
-        
+        if (cols1 != rows2)
+            return;
+
         int[][] result = new int[rows1][cols2];
 
         for (int i = 0; i < result.length; i++) {
@@ -121,6 +156,12 @@ public class TwoDArray {
                 System.out.print(arr[i][j] + "  ");
             }
             System.out.println();
+        }
+    }
+
+    public static void display(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + "  ");
         }
     }
 
